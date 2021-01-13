@@ -1,61 +1,95 @@
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-    <title>example</title>
-    <script>
-      window.addEventListener('load', init);
-      function init() {
-        //ボタン
-        button.addEventListener('click',function(){
-        location.reload(true);
-        });
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>three.js</title>
+</head>
+<body>
+<form name = "form1">
+  PosX : <input type = "number" id = "posX">
+  PosY : <input type = "number" id = "posY">
+  PosZ : <input type = "nunber" id = "posZ"><br>
+  
+  SizeX : <input type = "number" id = "SizeX">
+  SizeY : <input type = "number" id = "SizeY">
+  SizeZ : <input type = "number" id = "SizeZ">
+  <button id = "button">配置</button><br>
+</form>
+<script>
 
-        const width = 600;
-        const height = 400;
+</script>
 
-        const mouse = new THREE.Vector2();
 
-        const canvas = document.querySelector('#myCanvas');
+<div id="stage"></div>
 
-        const renderer = new THREE.WebGLRenderer({
-          canvas: canvas
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.js"></script>
+<script type="text/javascript">
+(function(){
+    'use strict';
 
-        const scene = new THREE.Scene();
+    var scene;
+    var box;
+    var camera;
+    var renderer;
+    var light;
+    var width = 800;
+    var height = 600;
 
-        const camera = new THREE.PerspectiveCamera(45, width / height);
-        camera.position.set(width, -height, +1000);
+  var button = document.getElementById("button");
+  button.addEventListener("click",function(e)
+    {
+      e.preventDefault();
+      var Pos_X = document.getElementById("posX").value;
+      var Pos_Y = document.getElementById("posY").value;
+      var Pos_Z = document.getElementById("posZ").value;
 
-        //box
-        const meshList = [];
-        canvas.addEventListener("click",event=>{
-          const geometry = new THREE.BoxBufferGeometry(50, 50, 50);
-          const material = new THREE.MeshStandardMaterial();
-          const box = new THREE.Mesh(geometry, material);
-          box.position.x = event.offsetX*2;
-          box.position.y = -event.offsetY*2;
-          box.position.z = 0;
-          scene.add(box);
-          meshList.push(box);
-          });
+      var Size_X = document.getElementById("SizeX").value;
+      var Size_Y = document.getElementById("SizeY").value;
+      var Size_Z = document.getElementById("SizeZ").value;
 
-        // 環境光源
-        const ambientLight = new THREE.AmbientLight(0xffffff,2);
-        scene.add(ambientLight);
+    // mesh メッシュ(物体)
+    // geometry ジオメトリー(形状)
+    // material マテリアル(表面素材)       
+        box = new THREE.Mesh(
+          new THREE.BoxGeometry(Size_X, Size_Y, Size_Z),
+          new THREE.MeshLambertMaterial({color: 0xff0000})
+         );
+        box.position.set(Pos_X, Pos_Y, Pos_Z);
+        scene.add(box);     
+    });
 
-        tick();
-        function tick() {
-          renderer.render(scene, camera);
-          requestAnimationFrame(tick);
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <canvas id="myCanvas"></canvas><br>
-    <button id="button">もう一度</button>
-  </body>
+
+    // scene シーン
+    scene = new THREE.Scene();
+
+
+    // light ライト
+    light = new THREE.DirectionalLight( 0xffffff, 1); // 色、光の強さ
+    light.position.set(0, 100, 30);
+    scene.add(light);
+
+    // camera カメラ
+    camera = new THREE.PerspectiveCamera( 45, width / height, 1, 1000 );
+    camera.position.set(60, 90, 400);
+    //camera.lookAt(box.position);  // boxの位置にカメラを向ける。
+
+    // renderer レンダラー
+    renderer = new THREE.WebGLRenderer( {antialias: true} );
+    renderer.setSize(width, height);
+    renderer.setClearColor(0xefefef);
+    renderer.setPixelRatio(window.devicePixelRatio); // 画面のピクセル比を設定
+    document.getElementById('stage').appendChild(renderer.domElement);
+
+
+    function render(){
+        requestAnimationFrame(render);
+
+        // レンダリング
+        renderer.render(scene, camera);
+    }
+    render();
+})();
+
+</script>
+
+</body>
 </html>

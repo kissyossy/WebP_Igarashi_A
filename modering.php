@@ -4,7 +4,7 @@
     <title>three.js</title>
 </head>
 <body>
-<form name = "form1">
+<form>
   PosX : <input type = "number" id = "posX">
   PosY : <input type = "number" id = "posY">
   PosZ : <input type = "nunber" id = "posZ"><br>
@@ -74,7 +74,6 @@
     renderer.setClearColor(0xefefef);
     renderer.setPixelRatio(window.devicePixelRatio); // 画面のピクセル比を設定
     document.getElementById('stage').appendChild(renderer.domElement);
-
 
     function render(){
         requestAnimationFrame(render);

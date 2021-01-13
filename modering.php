@@ -14,10 +14,6 @@
   SizeZ : <input type = "number" id = "SizeZ">
   <button id = "button">配置</button><br>
 </form>
-<script>
-
-</script>
-
 
 <div id="stage"></div>
 

@@ -9,6 +9,14 @@
 いあいあ
 
 あいあい
+<<<<<<< HEAD
 かか
 
 waaaaaaaaaaaa
+=======
+
+
+waaaaaaa
+
+uoooooooooo
+>>>>>>> sub1

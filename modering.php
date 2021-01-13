@@ -7,7 +7,7 @@
 <form>
   PosX : <input type = "number" id = "posX">
   PosY : <input type = "number" id = "posY">
-  PosZ : <input type = "nunber" id = "posZ"><br>
+  PosZ : <input type = "number" id = "posZ"><br>
   
   SizeX : <input type = "number" id = "SizeX">
   SizeY : <input type = "number" id = "SizeY">

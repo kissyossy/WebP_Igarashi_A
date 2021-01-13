@@ -11,7 +11,7 @@
         location.reload(true);
         });
 
-        const width = 800;
+        const width = 600;
         const height = 400;
 
         const mouse = new THREE.Vector2();
@@ -35,8 +35,8 @@
           const geometry = new THREE.BoxBufferGeometry(50, 50, 50);
           const material = new THREE.MeshStandardMaterial();
           const box = new THREE.Mesh(geometry, material);
-          box.position.x = event.clientX*2;
-          box.position.y = -event.clientY*2;
+          box.position.x = event.offsetX*2;
+          box.position.y = -event.offsetY*2;
           box.position.z = 0;
           scene.add(box);
           meshList.push(box);
@@ -55,7 +55,7 @@
     </script>
   </head>
   <body>
-    <canvas id="myCanvas"></canvas>
+    <canvas id="myCanvas"></canvas><br>
     <button id="button">もう一度</button>
   </body>
 </html>

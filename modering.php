@@ -11,7 +11,12 @@
   
   SizeX : <input type = "number" id = "SizeX">
   SizeY : <input type = "number" id = "SizeY">
-  SizeZ : <input type = "number" id = "SizeZ">
+  SizeZ : <input type = "number" id = "SizeZ"><br>
+
+  Red : <input type = "number" id = "red">
+  Green : <input type = "number" id = "green">
+  Blue : <input type = "number" id = "blue">  
+
   <button id = "button">配置</button><br>
 </form>
 
@@ -42,12 +47,16 @@
       var Size_Y = document.getElementById("SizeY").value;
       var Size_Z = document.getElementById("SizeZ").value;
 
+      var RED = document.getElementById("red").value;
+      var GREEN = document.getElementById("green").value;
+      var BLUE = document.getElementById("blue").value;
+
     // mesh メッシュ(物体)
     // geometry ジオメトリー(形状)
     // material マテリアル(表面素材)       
         box = new THREE.Mesh(
           new THREE.BoxGeometry(Size_X, Size_Y, Size_Z),
-          new THREE.MeshLambertMaterial({color: 0xff0000})
+          new THREE.MeshLambertMaterial({color:"rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
          );
         box.position.set(Pos_X, Pos_Y, Pos_Z);
         scene.add(box);     

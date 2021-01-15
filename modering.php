@@ -17,14 +17,14 @@
   Green : <input type = "number" id = "green">
   Blue : <input type = "number" id = "blue">  
 
-  <button id = "button">配置</button><br>
+  <button id = "button1">配置</button><br>
 </form>
 
 <div id="stage"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.js"></script>
-<script type="text/javascript">
-(function(){
+<script>
+(function init(){
     'use strict';
 
     var scene;
@@ -35,8 +35,8 @@
     var width = 800;
     var height = 600;
 
-  var button = document.getElementById("button");
-  button.addEventListener("click",function(e)
+  var button1 = document.getElementById("button1");
+  button1.addEventListener("click",function(e)
     {
       e.preventDefault();
       var Pos_X = document.getElementById("posX").value;
@@ -95,5 +95,17 @@
 
 </script>
 
+<script>
+//リセットボタン
+  window.addEventListener('load', init);
+  function init()
+  {
+    button2.addEventListener('click',function(){
+        location.reload(true);
+    });
+  }
+</script>
+
+<br><button id="button2">リセット</button><br>
 </body>
 </html>

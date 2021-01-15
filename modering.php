@@ -91,6 +91,18 @@
         renderer.render(scene, camera);
     }
     render();
+
+    //軸
+    var material1 = new THREE.LineBasicMaterial( { linewidth: 30, color:"rgb(0,0,0)" } );
+    var geometry1 = new THREE.Geometry();
+    geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
+    geometry1.vertices.push(new THREE.Vector3(width, 0, 0));
+    geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
+    geometry1.vertices.push(new THREE.Vector3(0, height, 0));
+    geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
+    geometry1.vertices.push(new THREE.Vector3(0, 0, 300));
+    scene.add( new THREE.Line( geometry1, material1 ) );
+    
 })();
 
 </script>

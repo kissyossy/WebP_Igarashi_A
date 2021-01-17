@@ -5,6 +5,7 @@
 </head>
 <body>
 <form>
+  <箱><br>
   PosX : <input type = "number" id = "posX">
   PosY : <input type = "number" id = "posY">
   PosZ : <input type = "number" id = "posZ"><br>
@@ -19,6 +20,22 @@
 
   <button id = "button1">配置</button><br>
 </form>
+<br>
+<form name = "form2">
+    <球><br>
+    PosX : <input type = "number" id = "posX_s">
+    PosY : <input type = "number" id = "posY_s">
+    PosZ : <input type = "number" id = "posZ_s"><br>
+    
+    SizeX : <input type = "number" id = "SizeX_s">
+    SizeY : <input type = "number" id = "SizeY_s">
+    SizeZ : <input type = "number" id = "SizeZ_s"><br>
+
+    Red : <input type = "number" id = "red_s">
+    Green : <input type = "number" id = "green_s">
+    Blue : <input type = "number" id = "blue_s">
+    <button id = "button2">配置</button><br>
+</form>
 
 <div id="stage"></div>
 
@@ -29,12 +46,14 @@
 
     var scene;
     var box;
+    var sphere;
     var camera;
     var renderer;
     var light;
     var width = 800;
     var height = 600;
 
+//箱
   var button1 = document.getElementById("button1");
   button1.addEventListener("click",function(e)
     {
@@ -62,6 +81,33 @@
         scene.add(box);     
     });
 
+//球
+    var button2 = document.getElementById("button2");
+    button2.addEventListener("click",function(e)
+        {
+            e.preventDefault();
+            var Pos_X = document.getElementById("posX_s").value;
+            var Pos_Y = document.getElementById("posY_s").value;
+            var Pos_Z = document.getElementById("posZ_s").value;
+
+            var Size_X = document.getElementById("SizeX_s").value;
+            var Size_Y = document.getElementById("SizeY_s").value;
+            var Size_Z = document.getElementById("SizeZ_s").value;
+
+            var RED = document.getElementById("red_s").value;
+            var GREEN = document.getElementById("green_s").value;
+            var BLUE = document.getElementById("blue_s").value;
+
+    // mesh メッシュ(物体)
+    // geometry ジオメトリー(形状)
+    // material マテリアル(表面素材)         
+            sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(Size_X, Size_Y, Size_Z),
+            new THREE.MeshLambertMaterial({color: "rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
+             );
+            sphere.position.set(Pos_X, Pos_Y, Pos_Z);
+            scene.add(sphere); 
+        });  
 
     // scene シーン
     scene = new THREE.Scene();
@@ -112,13 +158,13 @@
   window.addEventListener('load', init);
   function init()
   {
-    button2.addEventListener('click',function(){
+    button3.addEventListener('click',function(){
         location.reload(true);
     });
   }
 </script>
 
-<br><button id="button2">リセット</button><br>
+<br><button id="button3">リセット</button><br>
 <button onclick = "location.href='./top.php'">トップへ戻る</button>
 <button onclick = "location.href='./effect.php'">画像加工へ</button>
 </body>

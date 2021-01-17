@@ -18,7 +18,8 @@
   Blue : <input type = "number" id = "blue"> <br>
 
   <button id = "button1">BOX</button>
-  <button id = "button2">SPHERE</button><br>
+  <button id = "button2">SPHERE</button>
+  <button id = "button3">CYLINDER</button><br><br>
 </form>
 
 <div id="stage"></div>
@@ -31,6 +32,7 @@
     var scene;
     var box;
     var sphere;
+    var cylinder;
     var camera;
     var renderer;
     var light;
@@ -93,6 +95,34 @@
             scene.add(sphere); 
         });  
 
+//円柱
+    var button3 = document.getElementById("button3");
+    button3.addEventListener("click",function(e)
+        {
+            e.preventDefault();
+            var Pos_X = document.getElementById("posX").value;
+            var Pos_Y = document.getElementById("posY").value;
+            var Pos_Z = document.getElementById("posZ").value;
+
+            var Size_X = document.getElementById("SizeX").value;
+            var Size_Y = document.getElementById("SizeY").value;
+            var Size_Z = document.getElementById("SizeZ").value;
+
+            var RED = document.getElementById("red").value;
+            var GREEN = document.getElementById("green").value;
+            var BLUE = document.getElementById("blue").value;
+
+    // mesh メッシュ(物体)
+    // geometry ジオメトリー(形状)
+    // material マテリアル(表面素材)         
+            cylinder = new THREE.Mesh(
+            new THREE.CylinderGeometry(Size_X, Size_Y, Size_Z),
+            new THREE.MeshLambertMaterial({color: "rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
+             );
+            cylinder.position.set(Pos_X, Pos_Y, Pos_Z);
+            scene.add(cylinder); 
+        });  
+
     // scene シーン
     scene = new THREE.Scene();
 
@@ -142,13 +172,13 @@
   window.addEventListener('load', init);
   function init()
   {
-    button3.addEventListener('click',function(){
+    button4.addEventListener('click',function(){
         location.reload(true);
     });
   }
 </script>
 
-<br><button id="button3">リセット</button><br>
+<br><button id="button4">リセット</button><br>
 <button onclick = "location.href='./top.php'">トップへ戻る</button>
 <button onclick = "location.href='./effect.php'">画像加工へ</button>
 </body>

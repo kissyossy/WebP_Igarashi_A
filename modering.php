@@ -5,7 +5,6 @@
 </head>
 <body>
 <form>
-  <箱><br>
   PosX : <input type = "number" id = "posX">
   PosY : <input type = "number" id = "posY">
   PosZ : <input type = "number" id = "posZ"><br>
@@ -16,25 +15,10 @@
 
   Red : <input type = "number" id = "red">
   Green : <input type = "number" id = "green">
-  Blue : <input type = "number" id = "blue">  
+  Blue : <input type = "number" id = "blue"> <br>
 
-  <button id = "button1">配置</button><br>
-</form>
-<br>
-<form name = "form2">
-    <球><br>
-    PosX : <input type = "number" id = "posX_s">
-    PosY : <input type = "number" id = "posY_s">
-    PosZ : <input type = "number" id = "posZ_s"><br>
-    
-    SizeX : <input type = "number" id = "SizeX_s">
-    SizeY : <input type = "number" id = "SizeY_s">
-    SizeZ : <input type = "number" id = "SizeZ_s"><br>
-
-    Red : <input type = "number" id = "red_s">
-    Green : <input type = "number" id = "green_s">
-    Blue : <input type = "number" id = "blue_s">
-    <button id = "button2">配置</button><br>
+  <button id = "button1">BOX</button>
+  <button id = "button2">SPHERE</button><br>
 </form>
 
 <div id="stage"></div>
@@ -86,17 +70,17 @@
     button2.addEventListener("click",function(e)
         {
             e.preventDefault();
-            var Pos_X = document.getElementById("posX_s").value;
-            var Pos_Y = document.getElementById("posY_s").value;
-            var Pos_Z = document.getElementById("posZ_s").value;
+            var Pos_X = document.getElementById("posX").value;
+            var Pos_Y = document.getElementById("posY").value;
+            var Pos_Z = document.getElementById("posZ").value;
 
-            var Size_X = document.getElementById("SizeX_s").value;
-            var Size_Y = document.getElementById("SizeY_s").value;
-            var Size_Z = document.getElementById("SizeZ_s").value;
+            var Size_X = document.getElementById("SizeX").value;
+            var Size_Y = document.getElementById("SizeY").value;
+            var Size_Z = document.getElementById("SizeZ").value;
 
-            var RED = document.getElementById("red_s").value;
-            var GREEN = document.getElementById("green_s").value;
-            var BLUE = document.getElementById("blue_s").value;
+            var RED = document.getElementById("red").value;
+            var GREEN = document.getElementById("green").value;
+            var BLUE = document.getElementById("blue").value;
 
     // mesh メッシュ(物体)
     // geometry ジオメトリー(形状)

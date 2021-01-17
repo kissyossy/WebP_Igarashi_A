@@ -119,5 +119,7 @@
 </script>
 
 <br><button id="button2">リセット</button><br>
+<button onclick = "location.href='./top.php'">トップへ戻る</button>
+<button onclick = "location.href='./effect.php'">画像加工へ</button>
 </body>
 </html>

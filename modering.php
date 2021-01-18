@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>three.js</title>
+    <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
 <form>
@@ -21,6 +22,9 @@
   <button id = "button2">SPHERE</button>
   <button id = "button3">CYLINDER</button><br><br>
 </form>
+<p>(BOXの場合)<br>SizeX=幅, SizeY=高さ, SizeZ=奥行き<br>
+    (SPHEREの場合)<br>SizeX=半径, SizeY=経度分割数, SizeZ=緯度分割数<br>
+    (CYLINDERの場合)<br>SizeX=上面の半径, SizeY=底面の半径, SizeZ=高さ<br></p>
 
 <div id="stage"></div>
 

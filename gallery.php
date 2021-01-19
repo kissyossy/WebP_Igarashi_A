@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <link rel = "stylesheet" href = "style.css">
 
 <h1>ギャラリー<h1>
@@ -30,3 +31,5 @@ obj1.addEventListener("change", function(evt){
 },false);
 
 </script>
+=======
+>>>>>>> parent of 864ea19 (ギャラリーです。)

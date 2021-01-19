@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 <link rel = "stylesheet" href = "style.css">
 
-<h1>ギャラリー<h1>
-<h3>画像を選択してください<h3>
+<h1>『ギャラリー』<h1>
+<h3>作成した画像を選択してください。<h3>
 
 <input type="file" id="selfile"><br>
 
@@ -31,5 +30,3 @@ obj1.addEventListener("change", function(evt){
 },false);
 
 </script>
-=======
->>>>>>> parent of 864ea19 (ギャラリーです。)

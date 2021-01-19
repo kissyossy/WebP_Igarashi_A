@@ -35,7 +35,7 @@
       <button id = "button2">SPHERE</button>
       <button id = "button3">CYLINDER</button><br><br>
 			<button id="screenshot" type="button">Save...</button>
-      <br><button id="button2">リセット</button><br>
+      <br><button id="button4">リセット</button><br>
       <button onclick = "location.href='./top.php'">トップへ戻る</button>
       <button onclick = "location.href='./effect.php'">画像加工へ</button>
 		  </form>
@@ -328,6 +328,15 @@ var scene;
        a.click();
     };
   }());
+
+  //リセットボタン
+  window.addEventListener('load', init);
+  function init()
+  {
+    button4.addEventListener('click',function(){
+        location.reload(true);
+    });
+  }
 
 		</script>
 

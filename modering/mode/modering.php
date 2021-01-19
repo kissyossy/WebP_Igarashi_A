@@ -4,14 +4,7 @@
 		<title>draggable cubes</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #000000;
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
+		<link rel = "stylesheet" href = "style.css">
 	</head>
 	<body>
 
@@ -30,9 +23,13 @@
 			Green : <input type = "number" id = "green">
 			Blue : <input type = "number" id = "blue">  
 		  
-			<button id = "button1">配置</button><br>
+			<button id = "button1">BOX</button>
+      <button id = "button2">SPHERE</button>
+      <button id = "button3">CYLINDER</button><br><br>
 			<button id="screenshot" type="button">Save...</button>
-			<br><button id="button2">リセット</button><br>
+      <br><button id="button4">リセット</button><br>
+      <button onclick = "location.href='./top.php'">トップへ戻る</button>
+      <button onclick = "location.href='./effect.php'">画像加工へ</button>
 		  </form>
 		  
 
@@ -122,34 +119,92 @@ var scene;
 			objects.push( cube2 );*/
 
 
-			var button1 = document.getElementById("button1");
-      button1.addEventListener("click",function(e)
+			//箱
+  var button1 = document.getElementById("button1");
+  button1.addEventListener("click",function(e)
+    {
+      e.preventDefault();
+      var Pos_X = document.getElementById("posX").value;
+      var Pos_Y = document.getElementById("posY").value;
+      var Pos_Z = document.getElementById("posZ").value;
+
+      var Size_X = document.getElementById("SizeX").value;
+      var Size_Y = document.getElementById("SizeY").value;
+      var Size_Z = document.getElementById("SizeZ").value;
+
+      var RED = document.getElementById("red").value;
+      var GREEN = document.getElementById("green").value;
+      var BLUE = document.getElementById("blue").value;
+
+    // mesh メッシュ(物体)
+    // geometry ジオメトリー(形状)
+    // material マテリアル(表面素材)       
+        box = new THREE.Mesh(
+          new THREE.BoxGeometry(Size_X, Size_Y, Size_Z),
+          new THREE.MeshLambertMaterial({color:"rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
+         );
+        box.position.set(Pos_X, Pos_Y, Pos_Z);
+        scene.add(box);  
+        objects.push(box);   
+    });
+
+    //球
+    var button2 = document.getElementById("button2");
+    button2.addEventListener("click",function(e)
         {
-          e.preventDefault();
-          var Pos_X = document.getElementById("posX").value;
-          var Pos_Y = document.getElementById("posY").value;
-          var Pos_Z = document.getElementById("posZ").value;
+            e.preventDefault();
+            var Pos_X = document.getElementById("posX").value;
+            var Pos_Y = document.getElementById("posY").value;
+            var Pos_Z = document.getElementById("posZ").value;
 
-          var Size_X = document.getElementById("SizeX").value;
-          var Size_Y = document.getElementById("SizeY").value;
-          var Size_Z = document.getElementById("SizeZ").value;
+            var Size_X = document.getElementById("SizeX").value;
+            var Size_Y = document.getElementById("SizeY").value;
+            var Size_Z = document.getElementById("SizeZ").value;
 
-          var RED = document.getElementById("red").value;
-          var GREEN = document.getElementById("green").value;
-          var BLUE = document.getElementById("blue").value;
+            var RED = document.getElementById("red").value;
+            var GREEN = document.getElementById("green").value;
+            var BLUE = document.getElementById("blue").value;
 
-        // mesh メッシュ(物体)
-        // geometry ジオメトリー(形状)
-        // material マテリアル(表面素材)       
-            box = new THREE.Mesh(
-              new THREE.BoxGeometry(Size_X, Size_Y, Size_Z),
-              new THREE.MeshLambertMaterial({color:"rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
+    // mesh メッシュ(物体)
+    // geometry ジオメトリー(形状)
+    // material マテリアル(表面素材)         
+            sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(Size_X, Size_Y, Size_Z),
+            new THREE.MeshLambertMaterial({color: "rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
              );
-            box.position.set(Pos_X, Pos_Y, Pos_Z);
-            box.name = 'box1';
-            scene.add(box); 
-            objects.push(box);    
-        });
+            sphere.position.set(Pos_X, Pos_Y, Pos_Z);
+            scene.add(sphere); 
+            objects.push(sphere);  
+        });  
+
+//円柱
+    var button3 = document.getElementById("button3");
+    button3.addEventListener("click",function(e)
+        {
+            e.preventDefault();
+            var Pos_X = document.getElementById("posX").value;
+            var Pos_Y = document.getElementById("posY").value;
+            var Pos_Z = document.getElementById("posZ").value;
+
+            var Size_X = document.getElementById("SizeX").value;
+            var Size_Y = document.getElementById("SizeY").value;
+            var Size_Z = document.getElementById("SizeZ").value;
+
+            var RED = document.getElementById("red").value;
+            var GREEN = document.getElementById("green").value;
+            var BLUE = document.getElementById("blue").value;
+
+    // mesh メッシュ(物体)
+    // geometry ジオメトリー(形状)
+    // material マテリアル(表面素材)         
+            cylinder = new THREE.Mesh(
+            new THREE.CylinderGeometry(Size_X, Size_Y, Size_Z),
+            new THREE.MeshLambertMaterial({color: "rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
+             );
+            cylinder.position.set(Pos_X, Pos_Y, Pos_Z);
+            scene.add(cylinder); 
+            objects.push(cylinder);  
+        });  
 
 		/*//軸
 		var material1 = new THREE.LineBasicMaterial( { linewidth: 30, color:"rgb(0,0,0)" } );
@@ -266,7 +321,17 @@ var scene;
     };
   }());
 
-		</script>
+    </script>
+    <script>
+//リセットボタン
+  window.addEventListener('load', init);
+  function init()
+  {
+    button4.addEventListener('click',function(){
+        location.reload(true);
+    });
+  }
+</script>
 
 	</body>
 </html>

@@ -28,11 +28,9 @@
 
 <div id="stage"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+<script src="https://threejs.org/examples/jsm/controls/TrackballControls.js"></script>
 <script>
-(function init(){
-    'use strict';
-
     var scene;
     var box;
     var sphere;
@@ -42,9 +40,21 @@
     var light;
     var width = 800;
     var height = 600;
+    var projector = new THREE.Projector();
+(function init(){
+    'use strict';
 
+<<<<<<< HEAD:memo.php
+    
+
+//マウスのグローバル変数
+var mouse = { x: 0, y: 0 };  
+
+var button1 = document.getElementById("button1");
+=======
 //箱
   var button1 = document.getElementById("button1");
+>>>>>>> 34f0bd400002dfa564eb4089842126e2e9cd4c56:modering.php
   button1.addEventListener("click",function(e)
     {
       e.preventDefault();
@@ -68,7 +78,9 @@
           new THREE.MeshLambertMaterial({color:"rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
          );
         box.position.set(Pos_X, Pos_Y, Pos_Z);
-        scene.add(box);     
+        box.name = 'box1';
+        scene.add(box); 
+        targetList.push(box);    
     });
 
 //球
@@ -167,7 +179,53 @@
     geometry1.vertices.push(new THREE.Vector3(0, 0, 300));
     scene.add( new THREE.Line( geometry1, material1 ) );
     
+    
+    //オブジェクト格納グローバル変数
+var targetList = []; 
+window.onmousedown = function (ev){
+    if (ev.target == renderer.domElement) { 
+    
+        //マウス座標2D変換
+        var rect = ev.target.getBoundingClientRect();    
+        mouse.x =  ev.clientX - rect.left;
+        mouse.y =  ev.clientY - rect.top;
+        
+        //マウス座標3D変換 width（横）やheight（縦）は画面サイズ
+        mouse.x =  (mouse.x / width) * 2 - 1;           
+        mouse.y = -(mouse.y / height) * 2 + 1;
+        
+        // マウスベクトル
+        var vector = new THREE.Vector3( mouse.x, mouse.y ,1);
+
+       // vector はスクリーン座標系なので, オブジェクトの座標系に変換
+        projector.unprojectVector( vector, camera );
+
+        // 始点, 向きベクトルを渡してレイを作成
+        var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+        
+         // クリック判定
+        var obj = ray.intersectObjects( targetList );
+        
+         // クリックしていたら、alertを表示  
+        if ( obj.length > 0 ){                       
+          
+          alert("click!!")
+          
+       } 
+ 
+    }
+   }; 
+   controls = new TrackballControls(camera, renderer.domElement);
+   function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+    }
+    
 })();
+
+
+
+  
 
 </script>
 

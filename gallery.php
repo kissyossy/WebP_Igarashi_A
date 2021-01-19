@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-<link rel = "stylesheet" href = "style.css">
-<h1>ギャラリー<h1>
-<h3>作成した画像を選択してください。<h3>
+<link rel = "stylesheet" href = "stylesheet.css">
+<h1>ギャラリー</h1>
+<h3>作成した画像を選択してください。</h3>
 
 <script>
 
@@ -61,9 +61,8 @@ function createImageData(img) {
 <input type="file" onchange="onFileSelected(this)">
 </p>
 
-<p>
-<canvas id="test_canvas" width=400 height=400 style="border: 1px solid;"></canvas>
-</p>
+<canvas id="test_canvas" width=400 height=400 style="border: 1px solid; background-color: white;"></canvas>
+
 
 </body>
 </html>

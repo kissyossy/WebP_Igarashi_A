@@ -4,7 +4,15 @@
 		<title>draggable cubes</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel = "stylesheet" href = "style.css">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+			}
+    </style>
+    <link rel = "stylesheet" href = "style.css">
 	</head>
 	<body>
 
@@ -27,7 +35,7 @@
       <button id = "button2">SPHERE</button>
       <button id = "button3">CYLINDER</button><br><br>
 			<button id="screenshot" type="button">Save...</button>
-      <br><button id="button4">リセット</button><br>
+      <br><button id="button2">リセット</button><br>
       <button onclick = "location.href='./top.php'">トップへ戻る</button>
       <button onclick = "location.href='./effect.php'">画像加工へ</button>
 		  </form>
@@ -174,7 +182,7 @@ var scene;
              );
             sphere.position.set(Pos_X, Pos_Y, Pos_Z);
             scene.add(sphere); 
-            objects.push(sphere);  
+            objects.push(sphere);   
         });  
 
 //円柱
@@ -203,7 +211,7 @@ var scene;
              );
             cylinder.position.set(Pos_X, Pos_Y, Pos_Z);
             scene.add(cylinder); 
-            objects.push(cylinder);  
+            objects.push(cylinder);   
         });  
 
 		/*//軸
@@ -321,17 +329,7 @@ var scene;
     };
   }());
 
-    </script>
-    <script>
-//リセットボタン
-  window.addEventListener('load', init);
-  function init()
-  {
-    button4.addEventListener('click',function(){
-        location.reload(true);
-    });
-  }
-</script>
+		</script>
 
 	</body>
 </html>

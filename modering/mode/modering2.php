@@ -1,31 +1,47 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>three.js</title>
-</head>
-<body>
-<form>
-  PosX : <input type = "number" id = "posX">
-  PosY : <input type = "number" id = "posY">
-  PosZ : <input type = "number" id = "posZ"><br>
-  
-  SizeX : <input type = "number" id = "SizeX">
-  SizeY : <input type = "number" id = "SizeY">
-  SizeZ : <input type = "number" id = "SizeZ"><br>
+<html lang="ja">
+	<head>
+		<title>draggable cubes</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
 
-  Red : <input type = "number" id = "red">
-  Green : <input type = "number" id = "green">
-  Blue : <input type = "number" id = "blue">  
+		<canvas style="z-index:1" id="c"></canvas>
+		
+		<form style="z-index:2; position:absolute; top:10; left:10">
+			PosX : <input type = "number" id = "posX">
+			PosY : <input type = "number" id = "posY">
+			PosZ : <input type = "number" id = "posZ"><br>
+			
+			SizeX : <input type = "number" id = "SizeX">
+			SizeY : <input type = "number" id = "SizeY">
+			SizeZ : <input type = "number" id = "SizeZ"><br>
+		  
+			Red : <input type = "number" id = "red">
+			Green : <input type = "number" id = "green">
+			Blue : <input type = "number" id = "blue">  
+		  
+			<button id = "button1">配置</button><br>
+			<button id="screenshot" type="button">Save...</button>
+			<br><button id="button2">リセット</button><br>
+		  </form>
+		  
 
-  <button id = "button1">配置</button><br>
-</form>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+		<script src="../js_r79/TrackballControls.js"></script>
 
-<div id="stage"></div>
+		<script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
-<script src="../js_r79/TrackballControls.js"></script>
-<script>
-    var scene;
+var scene;
     var box;
     var camera;
     var renderer;
@@ -33,78 +49,48 @@
     var width = 800;
     var height = 600;
     var projector = new THREE.Projector();
-    // この平面に対してオブジェクトを平行に動かす
+
+			// オブジェクトを格納する配列
+			var objects = [];
+			// この平面に対してオブジェクトを平行に動かす
 			var plane = new THREE.Plane();
 
-var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2();
-var offset = new THREE.Vector3();
-var intersection = new THREE.Vector3();
+			var raycaster = new THREE.Raycaster();
+			var mouse = new THREE.Vector2();
+			var offset = new THREE.Vector3();
+			var intersection = new THREE.Vector3();
 
-// マウスオーバーしているオブジェクト
-var mouseoveredObj;
-// ドラッグしているオブジェクト
-var draggedObj;
-(function init(){
-    'use strict';
+			// マウスオーバーしているオブジェクト
+			var mouseoveredObj;
+			// ドラッグしているオブジェクト
+			var draggedObj;
 
-    
-
-//マウスのグローバル変数
-var mouse = { x: 0, y: 0 };  
-
-var button1 = document.getElementById("button1");
-  button1.addEventListener("click",function(e)
-    {
-      e.preventDefault();
-      var Pos_X = document.getElementById("posX").value;
-      var Pos_Y = document.getElementById("posY").value;
-      var Pos_Z = document.getElementById("posZ").value;
-
-      var Size_X = document.getElementById("SizeX").value;
-      var Size_Y = document.getElementById("SizeY").value;
-      var Size_Z = document.getElementById("SizeZ").value;
-
-      var RED = document.getElementById("red").value;
-      var GREEN = document.getElementById("green").value;
-      var BLUE = document.getElementById("blue").value;
-
-    // mesh メッシュ(物体)
-    // geometry ジオメトリー(形状)
-    // material マテリアル(表面素材)       
-        box = new THREE.Mesh(
-          new THREE.BoxGeometry(Size_X, Size_Y, Size_Z),
-          new THREE.MeshLambertMaterial({color:"rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
-         );
-        box.position.set(Pos_X, Pos_Y, Pos_Z);
-        box.name = 'box1';
-        scene.add(box); 
-        targetList.push(box);    
-    });
+			// シーンの作成
+			var scene = new THREE.Scene();
+			// light ライト
+			light = new THREE.AmbientLight(0xFFFFFF, 1.0); // 色、光の強さ
+			var light2 = new THREE.HemisphereLight(0x888888, 0x0000FF, 1.0);
+            //light.position.set(0, 100, 30);
+            scene.add(light);
+			scene.add(light2);
+			// camera カメラ
+			camera = new THREE.PerspectiveCamera( 45, width / height, 1, 1000 );
+            camera.position.set(10, 10, 10);
+            //camera.lookAt(box.position);  // boxの位置にカメラを向ける。
+			// レンダラーの作成
+			const canvas = document.querySelector('#c');
+			var renderer = new THREE.WebGLRenderer({canvas});
 
 
-    // scene シーン
-    scene = new THREE.Scene();
+			// レンダラーが描画するキャンバスサイズの設定
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setClearColor(0xefefef);
+            renderer.setPixelRatio(window.devicePixelRatio); // 画面のピクセル比を設定
+			//document.getElementById('stage').appendChild(renderer.domElement);
 
-
-    // light ライト
-    light = new THREE.DirectionalLight( 0xffffff, 1); // 色、光の強さ
-    light.position.set(0, 100, 30);
-    scene.add(light);
-
-    // camera カメラ
-    camera = new THREE.PerspectiveCamera( 45, width / height, 1, 1000 );
-    camera.position.set(100, 90, 400);
-    //camera.lookAt(box.position);  // boxの位置にカメラを向ける。
-
-    // renderer レンダラー
-    renderer = new THREE.WebGLRenderer( {antialias: true} );
-    renderer.setSize(width, height);
-    renderer.setClearColor(0xefefef);
-    renderer.setPixelRatio(window.devicePixelRatio); // 画面のピクセル比を設定
-    document.getElementById('stage').appendChild(renderer.domElement);
-
-    function render(){
+			// キャンバスをDOMツリーに追加
+			document.body.appendChild( renderer.domElement );
+			function render(){
         requestAnimationFrame(render);
 
         // レンダリング
@@ -112,57 +98,80 @@ var button1 = document.getElementById("button1");
     }
     render();
 
-    var controls = new THREE.TrackballControls( camera, renderer.domElement );
+			// TrackballControlsインスタンス作成
+			var controls = new THREE.TrackballControls( camera ,renderer.domElement);
+			controls.target.set( 0, 0, 0 )
+			// ジオメトリーの作成
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			/*// マテリアルの作成
+			var material = new THREE.MeshNormalMaterial( { color: 0x00ff00 } );
+			// オブジェクトの作成
+			var cube = new THREE.Mesh( geometry, material );
+			// オブジェクトの位置調整
+			cube.position.x = 2.0;
+			// オブジェクトをシーンに追加
+			scene.add( cube );
+			objects.push( cube );
 
-    //軸
-    var material1 = new THREE.LineBasicMaterial( { linewidth: 30, color:"rgb(0,0,0)" } );
-    var geometry1 = new THREE.Geometry();
-    geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
-    geometry1.vertices.push(new THREE.Vector3(width, 0, 0));
-    geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
-    geometry1.vertices.push(new THREE.Vector3(0, height, 0));
-    geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
-    geometry1.vertices.push(new THREE.Vector3(0, 0, 300));
-    scene.add( new THREE.Line( geometry1, material1 ) );
-    
-    
-    //オブジェクト格納グローバル変数
-var targetList = []; 
-window.onmousedown = function (ev){
-    if (ev.target == renderer.domElement) { 
-    
-        //マウス座標2D変換
-        var rect = ev.target.getBoundingClientRect();    
-        mouse.x =  ev.clientX - rect.left;
-        mouse.y =  ev.clientY - rect.top;
-        
-        //マウス座標3D変換 width（横）やheight（縦）は画面サイズ
-        mouse.x =  (mouse.x / width) * 2 - 1;           
-        mouse.y = -(mouse.y / height) * 2 + 1;
-        
-        // マウスベクトル
-        var vector = new THREE.Vector3( mouse.x, mouse.y ,1);
+			// オブジェクトを複製
+			var cube2 = cube.clone();
+			// オブジェクトの位置調整
+			cube.position.x = -2.0;
+			// オブジェクトをシーンに追加
+			scene.add( cube2 );
+			objects.push( cube2 );*/
 
-       // vector はスクリーン座標系なので, オブジェクトの座標系に変換
-        projector.unprojectVector( vector, camera );
 
-        // 始点, 向きベクトルを渡してレイを作成
-        var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-        
-         // クリック判定
-        var obj = ray.intersectObjects( targetList );
-        
-         // クリックしていたら、alertを表示  
-        if ( obj.length > 0 ){                       
-          
-          alert("click!!")
-          
-       } 
- 
-    }
-   }; 
+			var button1 = document.getElementById("button1");
+      button1.addEventListener("click",function(e)
+        {
+          e.preventDefault();
+          var Pos_X = document.getElementById("posX").value;
+          var Pos_Y = document.getElementById("posY").value;
+          var Pos_Z = document.getElementById("posZ").value;
 
-   renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+          var Size_X = document.getElementById("SizeX").value;
+          var Size_Y = document.getElementById("SizeY").value;
+          var Size_Z = document.getElementById("SizeZ").value;
+
+          var RED = document.getElementById("red").value;
+          var GREEN = document.getElementById("green").value;
+          var BLUE = document.getElementById("blue").value;
+
+        // mesh メッシュ(物体)
+        // geometry ジオメトリー(形状)
+        // material マテリアル(表面素材)       
+            box = new THREE.Mesh(
+              new THREE.BoxGeometry(Size_X, Size_Y, Size_Z),
+              new THREE.MeshLambertMaterial({color:"rgb(" +RED+ "," +GREEN+ "," +BLUE+ ")"})
+             );
+            box.position.set(Pos_X, Pos_Y, Pos_Z);
+            box.name = 'box1';
+            scene.add(box); 
+            objects.push(box);    
+        });
+
+		/*//軸
+		var material1 = new THREE.LineBasicMaterial( { linewidth: 30, color:"rgb(0,0,0)" } );
+        var geometry1 = new THREE.Geometry();
+        geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
+        geometry1.vertices.push(new THREE.Vector3(width, 0, 0));
+        geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
+        geometry1.vertices.push(new THREE.Vector3(0, height, 0));
+        geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
+        geometry1.vertices.push(new THREE.Vector3(0, 0, 300));
+        scene.add( new THREE.Line( geometry1, material1 ) );*/
+
+		// 座標軸を表示
+		var axes = new THREE.AxisHelper(25);
+            scene.add(axes);
+
+			// カメラ位置設定
+			/*camera.position.z = 5;
+			camera.position.x = 0.5;
+			camera.position.y = 0.5;*/
+
+			renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 			renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
 
@@ -188,9 +197,9 @@ window.onmousedown = function (ev){
 
 			function onDocumentMouseMove( event ) {
 				event.preventDefault();
-
-				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+				//var rect = event.target.getBoundingClientRect();
+				mouse.x = ( event.clientX  / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY  / window.innerHeight ) * 2 + 1;
 
 				raycaster.setFromCamera( mouse, camera );
 
@@ -204,12 +213,12 @@ window.onmousedown = function (ev){
 					}
 				} else {
 					// オブジェクトをドラッグしないでマウスを動かしている場合
-					var intersects = raycaster.intersectObjects( targetList );
+					var intersects = raycaster.intersectObjects( objects );
 
 					if ( intersects.length > 0 ) {
-						if ( mouseoveredObj != intersects[ 0 ].targetList ) {
+						if ( mouseoveredObj != intersects[ 0 ].object ) {
 							// マウスオーバー中のオブジェクトを入れ替え
-							mouseoveredObj = intersects[ 0 ].targetList;
+							mouseoveredObj = intersects[ 0 ].object;
 
 							// plane.normalにカメラの方向ベクトルを設定
 							// 平面の角度をカメラの向きに対して垂直に維持する
@@ -237,27 +246,27 @@ window.onmousedown = function (ev){
 				controls.update();
 				renderer.render( scene, camera );
 			}
-
-    
-})();
-
-
-
-  
-
-</script>
-
-<script>
-//リセットボタン
-  window.addEventListener('load', init);
-  function init()
-  {
-    button2.addEventListener('click',function(){
-        location.reload(true);
+			const elem = document.querySelector('#screenshot');
+  elem.addEventListener('click', () => {
+    render();
+    canvas.toBlob((blob) => {
+      saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
     });
-  }
-</script>
+  });
 
-<br><button id="button2">リセット</button><br>
-</body>
+  const saveBlob = (function() {
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    return function saveData(blob, fileName) {
+       const url = window.URL.createObjectURL(blob);
+       a.href = url;
+       a.download = fileName;
+       a.click();
+    };
+  }());
+
+		</script>
+
+	</body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 $name = $_GET["name"];
 $img = ImageCreateFromJPEG($name);
-//$img = ImageCreateFromJPEG(sprintf('inko.jpg'));
+list($width, $hight) = getimagesize($name);
 
 if(in_array('nega', $_GET['gd'])){
   ImageFilter($img, IMG_FILTER_NEGATE);
@@ -17,20 +17,15 @@ if(in_array('gauss', $_GET['gd'])){
 $kido = $_GET["kido"];
 ImageFilter($img, IMG_FILTER_BRIGHTNESS, $kido);
 
-//move_uploaded_file($img, ../);
+$image = imagecreatetruecolor(600, 400);    
+imagecopyresampled($image, $img, 0, 0, 0, 0, 600, 400, $width, $hight);
+
+$format = '%s_%s.jpg';
+$time = time();
+$sha1 = sha1(uniqid(mt_rand(),true));
+$file_name = sprintf($format,$time,$sha1);
 
 header('Content-Type: image/jpeg');
-ImageJPEG($img, './output.jpg');
+ImageJPEG($image, './' . $file_name);
 header("location: gazoukakouEnd.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="jp">
-
-<head>
-	<meta charset='UTF-8'>
-	<title> 画像加工 </title>
-	<link rel = "stylesheet" href = "stylesheet.css">
-</head>
-<body></body>
-</html>

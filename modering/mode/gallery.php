@@ -2,10 +2,14 @@
 <html>
 <body>
 
+<<<<<<< HEAD
 <link rel = "stylesheet" href = "memo.css">
+=======
+<link rel = "stylesheet" href = "stylesheet.css">
+>>>>>>> 8444dec22e39aac95229d9a951302c95dc8c0c82
 
-<h1>『ギャラリー』<h1>
-<h3>作成した画像を選択してください。<h3>
+<h1>『ギャラリー』</h1>
+<h3>作成した画像を選択してください。</h3>
 
 <script>
 
@@ -63,9 +67,9 @@ function createImageData(img) {
 <input type="file" onchange="onFileSelected(this)">
 </p>
 
-<p>
+
 <canvas id="test_canvas" width=600 height=400 style="border: 1px solid;"></canvas>
-</p>
+
 
 </body>
 </html>

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+	<meta charset='UTF-8'>
+	<title> 画像加工 </title>
+	<link rel = "stylesheet" href = "stylesheet.css">
+</head>
+
 <?php
 $name = $_GET["name"];
 $img = ImageCreateFromJPEG($name);

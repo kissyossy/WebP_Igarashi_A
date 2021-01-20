@@ -12,7 +12,7 @@
 				overflow: hidden;
 			}
     </style>
-    <link rel = "stylesheet" href = "style.css">
+    <link rel = "stylesheet" href = "stylesheet.css">
 	</head>
 	<body>
 
@@ -30,12 +30,12 @@
 			Red : <input type = "number" id = "red">
 			Green : <input type = "number" id = "green">
 			Blue : <input type = "number" id = "blue"><br>
-			<INPUT TYPE="button" VALUE="Explanation" ONCLICK="newwindow()"><br>
 			<button id = "button1">BOX</button>
             <button id = "button2">SPHERE</button>
             <button id = "button3">CYLINDER</button><br>
-			<button id="screenshot" type="button">Save...</button><br>
+			<button id="screenshot" type="button">SAVE</button><br>
 			<button id="button4">リセット</button><br>
+			<INPUT TYPE="button" VALUE="Explanation" ONCLICK="newwindow()"><br>
 			<a href="gazoukakou1.php">画像加工へ</a><br>
             <a href="top.php">トップへ戻る</a>
 		  </form>
@@ -317,7 +317,7 @@ var scene;
   elem.addEventListener('click', () => {
     render();
     canvas.toBlob((blob) => {
-      saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+      saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.jpg`);
     });
   });
 

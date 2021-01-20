@@ -4,7 +4,6 @@ $gazou = $_FILES['img']['name'];
 $num = mb_strlen($gazou); 
 $word = mb_substr($gazou,0,$num-4);
 $name = sprintf($format,$word);
-print $name;
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +12,6 @@ print $name;
 <head>
 	<meta charset='UTF-8'>
 	<title> 画像加工 </title>
-	<link rel = "stylesheet" href = "stylesheet.css">
 </head>
 
 <body>

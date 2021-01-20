@@ -5,7 +5,7 @@
 	</head>
 	<body>
 	    <div class="article">
-			<h2>加工された画像を「output.jpg」としてhtdocsフォルダに保存しました。</h2><br>
+			<h2>加工された画像をmodeフォルダに保存しました。</h2><br>
 			<a href="top.php">最初のページに戻る</a>
 			</p>
 		</div>

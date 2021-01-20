@@ -29,3 +29,4 @@ header('Content-Type: image/jpeg');
 ImageJPEG($image, './' . $file_name);
 header("location: gazoukakouEnd.php");
 ?>
+<link rel = "stylesheet" href = "stylesheet.css">

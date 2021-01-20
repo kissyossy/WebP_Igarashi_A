@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="jp">
-
-<head>
-	<meta charset='UTF-8'>
-	<title> 画像加工 </title>
-	<link rel = "stylesheet" href = "stylesheet.css">
-</head>
-
 <?php
 $name = $_GET["name"];
 $img = ImageCreateFromJPEG($name);
@@ -32,3 +23,14 @@ header('Content-Type: image/jpeg');
 ImageJPEG($img, './output.jpg');
 header("location: gazoukakouEnd.php");
 ?>
+
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+	<meta charset='UTF-8'>
+	<title> 画像加工 </title>
+	<link rel = "stylesheet" href = "stylesheet.css">
+</head>
+<body></body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<title>draggable cubes</title>
+		<title>Creation</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -29,15 +29,15 @@
 		  
 			Red : <input type = "number" id = "red">
 			Green : <input type = "number" id = "green">
-			Blue : <input type = "number" id = "blue">  
-		  
+			Blue : <input type = "number" id = "blue"><br>
+			<INPUT TYPE="button" VALUE="Explanation" ONCLICK="newwindow()"><br>
 			<button id = "button1">BOX</button>
-      <button id = "button2">SPHERE</button>
-      <button id = "button3">CYLINDER</button><br><br>
-			<button id="screenshot" type="button">Save...</button>
-      <br><button id="button4">リセット</button><br>
-      <button onclick = "location.href='./top.php'">トップへ戻る</button>
-      <button onclick = "location.href='./effect.php'">画像加工へ</button>
+            <button id = "button2">SPHERE</button>
+            <button id = "button3">CYLINDER</button><br>
+			<button id="screenshot" type="button">Save...</button><br>
+			<button id="button4">リセット</button><br>
+			<a href="gazoukakou1.php">画像加工へ</a><br>
+            <a href="top.php">トップへ戻る</a>
 		  </form>
 		  
 
@@ -45,6 +45,10 @@
 		<script src="../js_r79/TrackballControls.js"></script>
 
 		<script>
+			function newwindow() {
+				window.open("memo.php", "説明" , "width=400,height=300");
+			}
+
 
 var scene;
     var box;

@@ -1,0 +1,24 @@
+body{
+	background-color: #fff5ee;
+	color: #191970;
+	text-shadow:2px 2px 1px #87cefa;
+}
+
+button,#submit{
+	background-color: #f08080;
+	color: #ffffff
+}
+
+p{
+	background-color: #fffafa;
+	border-style: solid;
+	border-color: #ffb6c1;
+}
+
+h1,h3{
+	background-color: #fffafa;
+	border-style: solid;
+	border-width: 0 0 1px 5px;
+	border-color: #ffb6c1;
+	padding: 1px 10px;
+}

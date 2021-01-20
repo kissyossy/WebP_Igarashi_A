@@ -63,9 +63,9 @@ function createImageData(img) {
 <input type="file" onchange="onFileSelected(this)">
 </p>
 
-<p>
+
 <canvas id="test_canvas" width=600 height=400 style="border: 1px solid;"></canvas>
-</p>
+
 
 </body>
 </html>

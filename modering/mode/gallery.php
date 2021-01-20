@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<link rel = "stylesheet" href = "style.css">
+<link rel = "stylesheet" href = "memo.css">
 
 <h1>『ギャラリー』<h1>
 <h3>作成した画像を選択してください。<h3>

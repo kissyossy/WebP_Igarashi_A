@@ -4,6 +4,7 @@
 <head>
 	<meta charset='UTF-8'>
 	<title> 画像加工 </title>
+	<link rel = "stylesheet" href = "stylesheet.css">
 </head>
 
 <body>

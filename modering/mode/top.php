@@ -9,7 +9,7 @@
         <h1>CREATION</h1>
         
         <p>
-        <a  class="model" href="modering.php">
+        <a  class="model" ONCLICK="newwindow()">
             モデリングに移動
         </a>
         </p>
@@ -28,4 +28,9 @@
         </div>
 
     </body>
+    <script>
+			function newwindow() {
+				window.open("modering.php", "モデリング" , "width=2100,height=1450");
+			}
+</script>
  </html>

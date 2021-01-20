@@ -8,7 +8,7 @@
 	<body>
 	    <div class="article">
 			<h2>加工された画像を「output.jpg」としてhtdocsフォルダに保存しました。</h2><br>
-			<a href="top.php">最初のページに戻る</a>
+			<a href="#" onClick="window.close(); return false;">ウィンドウを閉じる</a>
 			</p>
 		</div>
 	</body>

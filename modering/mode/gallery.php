@@ -6,9 +6,9 @@
 <input type="file" id="selfile"><br>
 
 <div id="bg"></div>
+<canvas id="c"></canvas>
 
 <style type="text/css">
-
 div#bg{ width:960px;  height:540px; border:5px solid black; overflow:auto }
 </style>
 

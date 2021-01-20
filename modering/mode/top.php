@@ -30,7 +30,7 @@
     </body>
     <script>
 			function newwindow() {
-				window.open("modering.php", "モデリング" , "width=2100,height=1450");
+				window.open("modering.php", "モデリング" , "width=1050,height=950");
 			}
 </script>
  </html>

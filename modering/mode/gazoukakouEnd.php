@@ -2,6 +2,7 @@
 <html lang="ja">
 	<head>
 		<meta charset="utf-8"><title>画像加工完了</title>
+		<link rel = "stylesheet" href = "stylesheet.css">
 	</head>
 	<body>
 	    <div class="article">

@@ -1,7 +1,7 @@
 <link rel = "stylesheet" href = "stylesheet.css">
 
-<h1>『ギャラリー』<h1>
-<h3>作成した画像を選択してください。<h3>
+<h1>『ギャラリー』</h1>
+<h3>作成した画像を選択してください。</h3>
 
 <input type="file" id="selfile"><br>
 

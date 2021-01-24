@@ -65,7 +65,6 @@
 		var objects = [];
 		// この平面に対してオブジェクトを平行に動かす
 		var plane = new THREE.Plane();
-
 		var raycaster = new THREE.Raycaster();
 		var mouse = new THREE.Vector2();
 		var offset = new THREE.Vector3();
@@ -87,7 +86,7 @@
 		// camera カメラ
 		camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
 		camera.position.set(10, 10, 10);
-		//camera.lookAt(box.position);  // boxの位置にカメラを向ける。
+		
 		// レンダラーの作成
 		const canvas = document.querySelector('#c');
 		var renderer = new THREE.WebGLRenderer({
@@ -117,23 +116,7 @@
 		controls.target.set(0, 0, 0)
 		// ジオメトリーの作成
 		var geometry = new THREE.BoxGeometry(1, 1, 1);
-		/*// マテリアルの作成
-		var material = new THREE.MeshNormalMaterial( { color: 0x00ff00 } );
-		// オブジェクトの作成
-		var cube = new THREE.Mesh( geometry, material );
-		// オブジェクトの位置調整
-		cube.position.x = 2.0;
-		// オブジェクトをシーンに追加
-		scene.add( cube );
-		objects.push( cube );
-
-		// オブジェクトを複製
-		var cube2 = cube.clone();
-		// オブジェクトの位置調整
-		cube.position.x = -2.0;
-		// オブジェクトをシーンに追加
-		scene.add( cube2 );
-		objects.push( cube2 );*/
+		
 
 
 		//箱
@@ -226,19 +209,9 @@
 			objects.push(cylinder);
 		});
 
-		/*//軸
-		var material1 = new THREE.LineBasicMaterial( { linewidth: 30, color:"rgb(0,0,0)" } );
-        var geometry1 = new THREE.Geometry();
-        geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
-        geometry1.vertices.push(new THREE.Vector3(width, 0, 0));
-        geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
-        geometry1.vertices.push(new THREE.Vector3(0, height, 0));
-        geometry1.vertices.push(new THREE.Vector3(0, 0, 0));
-        geometry1.vertices.push(new THREE.Vector3(0, 0, 300));
-        scene.add( new THREE.Line( geometry1, material1 ) );*/
 
 		// 座標軸を表示
-		var axes = new THREE.AxisHelper(25);
+		var axes = new THREE.AxisHelper(10000);
 		scene.add(axes);
 
 		// カメラ位置設定
@@ -322,11 +295,14 @@
 			controls.update();
 			renderer.render(scene, camera);
 		}
+
+
+		//画像保存
 		const elem = document.querySelector('#screenshot');
 		elem.addEventListener('click', () => {
 			render();
 			canvas.toBlob((blob) => {
-				saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.jpg`);
+				saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
 			});
 		});
 

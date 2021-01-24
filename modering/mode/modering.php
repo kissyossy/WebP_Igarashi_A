@@ -97,12 +97,6 @@
 			renderer.render(scene, camera);
 		}
 		render();
-
-		// TrackballControlsインスタンス作成
-		var controls = new THREE.TrackballControls(camera, renderer.domElement);
-		controls.target.set(0, 0, 0)
-		// ジオメトリーの作成
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		
 
 
@@ -203,6 +197,12 @@
 
 
 
+　　　　　// TrackballControlsインスタンス作成
+　　　　　var controls = new THREE.TrackballControls(camera, renderer.domElement);
+		controls.target.set(0, 0, 0)
+		
+		// ジオメトリーの作成
+		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		// オブジェクトを格納する配列
 		var objects = [];
 		// この平面に対してオブジェクトを平行に動かす

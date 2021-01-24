@@ -61,20 +61,7 @@
 		var height = 600;
 		var projector = new THREE.Projector();
 
-		// オブジェクトを格納する配列
-		var objects = [];
-		// この平面に対してオブジェクトを平行に動かす
-		var plane = new THREE.Plane();
-		var raycaster = new THREE.Raycaster();
-		var mouse = new THREE.Vector2();
-		var offset = new THREE.Vector3();
-		var intersection = new THREE.Vector3();
-
-		// マウスオーバーしているオブジェクト
-		var mouseoveredObj;
-		// ドラッグしているオブジェクト
-		var draggedObj;
-
+	
 		// シーンの作成
 		var scene = new THREE.Scene();
 		// light ライト
@@ -214,10 +201,22 @@
 		var axes = new THREE.AxisHelper(10000);
 		scene.add(axes);
 
-		// カメラ位置設定
-		/*camera.position.z = 5;
-		camera.position.x = 0.5;
-		camera.position.y = 0.5;*/
+
+
+		// オブジェクトを格納する配列
+		var objects = [];
+		// この平面に対してオブジェクトを平行に動かす
+		var plane = new THREE.Plane();
+		var raycaster = new THREE.Raycaster();
+		var mouse = new THREE.Vector2();
+		var offset = new THREE.Vector3();
+		var intersection = new THREE.Vector3();
+
+		// マウスオーバーしているオブジェクト
+		var mouseoveredObj;
+		// ドラッグしているオブジェクト
+		var draggedObj;
+
 
 		renderer.domElement.addEventListener('mousedown', onDocumentMouseDown, false);
 		renderer.domElement.addEventListener('mousemove', onDocumentMouseMove, false);

@@ -1,9 +1,5 @@
 <?php
-$format = '%s.jpg';
-$gazou = $_FILES['img']['name'];
-$num = mb_strlen($gazou);
-$word = mb_substr($gazou, 0, $num - 4);
-$name = sprintf($format, $word);
+$name = $_FILES['img']['name'];
 ?>
 
 <!DOCTYPE html>
@@ -24,8 +20,11 @@ $name = sprintf($format, $word);
 		輝度(明度)<input type="text" name="kido">※1~255の範囲でないと動きません<br>
 		<input type="hidden" name="name" value="<?php print $name; ?>">
 		<br>
-		<input type="submit" value="送信">
+		<input type="submit" value="加工内容で画像をダウンロード">
 	</form>
+	<br>
+	<a href="gazoukakou1.php">前の作業に戻る</a>
+	<a href="#" onClick="window.close(); return false;">ウィンドウを閉じる</a>
 </body>
 
 </html>

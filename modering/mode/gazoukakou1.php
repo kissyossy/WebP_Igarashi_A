@@ -9,11 +9,12 @@
 
 <body>
 	<form action="gazoukakou2.php" method="POST" enctype="multipart/form-data">
-		<h2>modeフォルダにあるjpeg画像を選択してください</h2><br>
-		加工した画像はmodeフォルダに保存されます。<br>
-		<input name="img" type="file" accept="image/jpeg" required><br>
+		<h2>modeフォルダにあるpng画像を選択してください</h2><br>
+		<input name="img" type="file" accept="image/png" required><br>
 		<br>
 		<input type="submit" value="送信">
+		<br>
+		<a href="top.php">トップに戻る</a>
 	</form>
 </body>
 

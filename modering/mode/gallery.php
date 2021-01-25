@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<link rel = "stylesheet" href = "stylesheet.css">
+    <link rel="stylesheet" href="stylesheet.css">
 
-<h1>『ギャラリー』</h1>
-<h3>作成した画像を選択してください。</h3>
+    <h1>『ギャラリー』</h1>
+    <h3>作成した画像を選択してください。</h3>
 
-<script>
+    <script>
+        function onFileSelected(input) {
 
-function onFileSelected(input) {
+            var file = input.files[0];
 
-    var file = input.files[0];
+            var reader = new FileReader();
 
-    var reader = new FileReader();
+            reader.onload = onFileLoaded;
 
-    reader.onload = onFileLoaded;
+            reader.readAsDataURL(file);
 
-    reader.readAsDataURL(file);
+        }
 
-}
+        function onFileLoaded(e) {
 
-function onFileLoaded(e) {
+            var src_data = e.target.result;
 
-    var src_data = e.target.result;
+            var img = new Image();
 
-    var img = new Image();
+            img.onload = onImageSetted;
+            img.src = src_data;
 
-    img.onload = onImageSetted;
-    img.src = src_data;
+        }
 
-}
+        function onImageSetted(e) {
 
-function onImageSetted(e) {
+            var data = createImageData(e.target);
 
-    var data = createImageData(e.target);
+            document.getElementById('test_canvas').getContext('2d').putImageData(data, 0, 0);
 
-    document.getElementById('test_canvas').getContext('2d').putImageData(data, 0, 0);
+        }
 
-}
+        function createImageData(img) {
 
-function createImageData(img) {
+            var cv = document.createElement('canvas');
 
-    var cv = document.createElement('canvas');
+            cv.width = img.naturalWidth;
+            cv.height = img.naturalHeight;
 
-    cv.width = img.naturalWidth;
-    cv.height = img.naturalHeight;
+            var ct = cv.getContext('2d');
 
-    var ct = cv.getContext('2d');
+            ct.drawImage(img, 0, 0);
 
-    ct.drawImage(img, 0, 0);
+            var data = ct.getImageData(0, 0, cv.width, cv.height);
 
-    var data = ct.getImageData(0, 0, cv.width, cv.height);
+            return data;
 
-    return data;
+        }
+    </script>
 
-}
-
-</script>
-
-<p>
-<input type="file" onchange="onFileSelected(this)">
-</p>
+    <p>
+        <input type="file" onchange="onFileSelected(this)">
+    </p>
 
 
-<canvas id="test_canvas" width=600 height=400 style="border: 1px solid;"></canvas>
+    <canvas id="test_canvas" width=600 height=400 style="border: 1px solid;"></canvas>
 
 
 </body>
+
 </html>

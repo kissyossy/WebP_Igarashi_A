@@ -16,7 +16,7 @@
             var reader = new FileReader();
 
             reader.onload = onFileLoaded;
-
+//s
             reader.readAsDataURL(file);
 
         }
